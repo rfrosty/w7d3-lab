@@ -1,28 +1,36 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang="html">
+  <div class="">
+    <h1>Country's lab</h1>
+    <countries-list :countries='countries'></countries-list>
   </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import CountriesList from './components/CountriesList.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  data () {
+    return {
+      countries: []
+    }
+  },
+  mounted () {
+    fetch('https://restcountries.eu/rest/v2/all')
+    .then(response => response.json())
+    .then(data => this.countries = data )
+  },
+
+components: {
+  "countries-list": CountriesList,
+}
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css" scoped>
 </style>
+
+<!-- mounted is a lifecycle hook: it just happens. -->
+<!-- this was reffering to default. -->
